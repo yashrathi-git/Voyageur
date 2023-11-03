@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.instagram_clone_flutter">
+    package="com.example.voyageur">
     <uses-permission android:name="android.permission.INTERNET" /> 
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
    <application
-        android:label="instagram_clone_flutter"
+        android:label="voyageur"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
