@@ -4,11 +4,36 @@ import 'package:voyageur/models/post.dart';
 import 'package:voyageur/resources/storage_methods.dart';
 import 'package:uuid/uuid.dart';
 
+//  String res = await FireStoreMethods().uploadPost(
+//           _descriptionController.text,
+//           _file!,
+//           uid,
+//           username,
+//           profImage,
+//           _files,
+//           _locationController.text,
+//           _isPackageSelected,
+//           _packageNameController.text,
+//           _packageLinkController.text,
+//           _packagePriceController.text,
+//           _selectedDate);
+
 class FireStoreMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<String> uploadPost(String description, Uint8List file, String uid,
-      String username, String profImage, List<Uint8List>? files) async {
+  Future<String> uploadPost(
+      String description,
+      Uint8List file,
+      String uid,
+      String username,
+      String profImage,
+      List<Uint8List>? files,
+      String location,
+      bool isPackageSelected,
+      String packageName,
+      String packageLink,
+      String packagePrice,
+      DateTime? date) async {
     // asking uid here because we dont want to make extra calls to firebase auth when we can just get from our state management
     String res = "Some error occurred";
     try {
@@ -33,6 +58,12 @@ class FireStoreMethods {
         profImage: profImage,
         files: photoUrls,
         isMultipleImages: (files != null && files.length > 0) ? true : false,
+        location: location,
+        isPackageSelected: isPackageSelected,
+        packageName: packageName,
+        packageLink: packageLink,
+        packagePrice: packagePrice,
+        date: date,
       );
       _firestore.collection('posts').doc(postId).set(post.toJson());
       res = "success";

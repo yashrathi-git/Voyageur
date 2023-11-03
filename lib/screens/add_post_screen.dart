@@ -95,7 +95,13 @@ class _AddPostScreenState extends State<AddPostScreen> {
           uid,
           username,
           profImage,
-          _files);
+          _files,
+          _locationController.text,
+          _isPackageSelected,
+          _packageNameController.text,
+          _packageLinkController.text,
+          _packagePriceController.text,
+          _selectedDate);
       if (res == "success") {
         setState(() {
           isLoading = false;
