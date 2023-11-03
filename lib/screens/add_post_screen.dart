@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:voyageur/providers/user_provider.dart';
 import 'package:voyageur/resources/firestore_methods.dart';
 import 'package:voyageur/utils/colors.dart';
@@ -17,6 +18,7 @@ class AddPostScreen extends StatefulWidget {
 
 class _AddPostScreenState extends State<AddPostScreen> {
   Uint8List? _file;
+  List<Uint8List>? _files;
   bool isLoading = false;
   final TextEditingController _descriptionController = TextEditingController();
 
@@ -47,6 +49,19 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     _file = file;
                   });
                 }),
+            SimpleDialogOption(
+              padding: const EdgeInsets.all(20),
+              child: const Text('Choose Multiple Images'),
+              onPressed: () async {
+                Navigator.of(context).pop();
+                List<Uint8List> files = await pickMultipleImages();
+                setState(() {
+                  _files = files;
+                  _file = files[0];
+                  print(_files);
+                });
+              },
+            ),
             SimpleDialogOption(
               padding: const EdgeInsets.all(20),
               child: const Text("Cancel"),
