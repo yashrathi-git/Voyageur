@@ -11,6 +11,8 @@ import 'package:voyageur/widgets/like_animation.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import 'image_carosel.dart';
+
 class PostCard extends StatefulWidget {
   final snap;
   const PostCard({
@@ -62,16 +64,19 @@ class _PostCardState extends State<PostCard> {
 
   Widget buildImageCarousel(List<String> imageUrls) {
     return Container(
-      height: 200, // Adjust the height as needed
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
+      height: MediaQuery.of(context).size.height * 0.35,
+      child: PageView.builder(
         itemCount: imageUrls.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.all(4.0),
-            child: Image.network(
-              imageUrls[index],
-              fit: BoxFit.cover,
+            child: ClipRRect(
+              // borderRadius: BorderRadius.circular(8.0),
+              child: Image.network(
+                imageUrls[index],
+                fit: BoxFit.cover,
+                width: double.infinity,
+              ),
             ),
           );
         },
@@ -120,7 +125,7 @@ class _PostCardState extends State<PostCard> {
               alignment: Alignment.center,
               children: [
                 isMultipleImages
-                    ? buildImageCarousel(files!)
+                    ? ImageCarousel(imageUrls: files!)
                     : SizedBox(
                         height: MediaQuery.of(context).size.height * 0.35,
                         width: double.infinity,
