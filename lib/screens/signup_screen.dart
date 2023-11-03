@@ -94,13 +94,15 @@ class _SignupScreenState extends State<SignupScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Flexible(
-                flex: 2,
+                flex: 1,
                 child: Container(),
               ),
-              SvgPicture.asset(
-                'assets/ic_instagram.svg',
-                color: primaryColor,
-                height: 64,
+              const SizedBox(height: 16), // Adjust the spacing as needed
+              Image.asset(
+                'assets/logo3.png',
+                height: 100,
+                width: 200,
+                alignment: Alignment.center,
               ),
               const SizedBox(
                 height: 64,
@@ -189,10 +191,7 @@ class _SignupScreenState extends State<SignupScreen> {
               const SizedBox(
                 height: 12,
               ),
-              Flexible(
-                flex: 2,
-                child: Container(),
-              ),
+              Spacer(), // Add Spacer widget to separate the form fields and button
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
