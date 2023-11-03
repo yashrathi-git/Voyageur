@@ -69,22 +69,31 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: MediaQuery.of(context).size.width > webScreenSize
               ? EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width / 3)
-              : const EdgeInsets.symmetric(horizontal: 32),
+              : const EdgeInsets.symmetric(horizontal: 28),
           width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Flexible(
-                flex: 2,
+                flex: 1,
                 child: Container(),
               ),
-              SvgPicture.asset(
-                'assets/ic_instagram.svg',
-                color: primaryColor,
-                height: 64,
-              ),
-              const SizedBox(
-                height: 64,
+              Column(
+                children: [
+                  Image.asset(
+                    'assets/logo.png',
+                    height: 200,
+                    width: 200,
+                    alignment: Alignment.center,
+                  ),
+                  const SizedBox(height: 01), // Adjust the spacing as needed
+                  Image.asset(
+                    'assets/logo3.png',
+                    height: 100,
+                    width: 200,
+                    alignment: Alignment.center,
+                  ),
+                ],
               ),
               TextFieldInput(
                 hintText: 'Enter your email',
