@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -13,7 +15,11 @@ pickImage(ImageSource source) async {
 pickMultipleImages() async {
   final ImagePicker imagePicker = ImagePicker();
   List<XFile> files = await imagePicker.pickMultiImage();
-  return files;
+  List<Uint8List> images = [];
+  for (XFile file in files) {
+    images.add(await file.readAsBytes());
+  }
+  return images;
 }
 
 // for displaying snackbars

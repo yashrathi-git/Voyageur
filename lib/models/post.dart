@@ -9,17 +9,21 @@ class Post {
   final DateTime datePublished;
   final String postUrl;
   final String profImage;
+  final List<String>? files;
+  final bool? isMultipleImages;
 
-  const Post(
-      {required this.description,
-      required this.uid,
-      required this.username,
-      required this.likes,
-      required this.postId,
-      required this.datePublished,
-      required this.postUrl,
-      required this.profImage,
-      });
+  const Post({
+    required this.description,
+    required this.uid,
+    required this.username,
+    required this.likes,
+    required this.postId,
+    required this.datePublished,
+    required this.postUrl,
+    required this.profImage,
+    this.files,
+    this.isMultipleImages,
+  });
 
   static Post fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
@@ -32,11 +36,15 @@ class Post {
       datePublished: snapshot["datePublished"],
       username: snapshot["username"],
       postUrl: snapshot['postUrl'],
-      profImage: snapshot['profImage']
+      profImage: snapshot['profImage'],
+      files: snapshot['files'] != null
+          ? List<String>.from(snapshot['files'])
+          : null,
+      isMultipleImages: snapshot['isMultipleImages'] ?? false,
     );
   }
 
-   Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "description": description,
         "uid": uid,
         "likes": likes,
@@ -44,6 +52,8 @@ class Post {
         "postId": postId,
         "datePublished": datePublished,
         'postUrl': postUrl,
-        'profImage': profImage
+        'profImage': profImage,
+        'files': files,
+        'isMultipleImages': isMultipleImages,
       };
 }
