@@ -63,7 +63,7 @@ class Post {
       uid: snapshot["uid"],
       likes: snapshot["likes"],
       postId: snapshot["postId"],
-      datePublished: snapshot["datePublished"],
+      datePublished: snapshot["datePublished"].toDate(),
       username: snapshot["username"],
       postUrl: snapshot['postUrl'],
       profImage: snapshot['profImage'],
@@ -76,7 +76,7 @@ class Post {
       packageName: snapshot['packageName'],
       packageLink: snapshot['packageLink'],
       packagePrice: snapshot['packagePrice'],
-      date: snapshot['date'],
+      date: (snapshot['date'] != null) ? snapshot['date'].toDate() : null,
     );
   }
 

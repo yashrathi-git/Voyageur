@@ -16,7 +16,7 @@ class ImageCarousel extends StatefulWidget {
 class _ImageCarouselState extends State<ImageCarousel> {
   PageController _pageController = PageController();
   int _currentPage = 0;
-  late Timer _timer;
+  Timer? _timer;
 
   @override
   void initState() {
@@ -96,7 +96,8 @@ class _ImageCarouselState extends State<ImageCarousel> {
 
   @override
   void dispose() {
-    _timer.cancel(); // Cancel the timer when disposing of the widget
+    if (_timer != null)
+      _timer!.cancel(); // Cancel the timer when disposing of the widget
     _pageController.dispose();
     super.dispose();
   }

@@ -11,6 +11,7 @@ import 'package:voyageur/widgets/like_animation.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../screens/location_view_screen.dart';
 import '../screens/trip_package.dart';
 import 'image_carosel.dart';
 
@@ -360,6 +361,13 @@ class _PostCardState extends State<PostCard> {
                               child: OutlinedButton(
                                 onPressed: () {
                                   // Navigate to the location screen
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => LocationViewScreen(
+                                        location: widget.snap["location"],
+                                      ),
+                                    ),
+                                  );
                                 },
                                 child: Text(
                                   'View ${widget.snap["location"]}',
@@ -412,7 +420,6 @@ class _PostCardState extends State<PostCard> {
                               ),
                             ),
                           ),
-// ...
                       ],
                     ),
                   ],
