@@ -393,6 +393,7 @@ class _PostCardState extends State<PostCard> {
                                     MaterialPageRoute(
                                       builder: (context) =>
                                           PackageDetailsScreen(
+                                              imageUrls: files,
                                               packageLink:
                                                   widget.snap["packageLink"],
                                               packageName:
