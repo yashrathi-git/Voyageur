@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_carousel/infinite_carousel.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:url_launcher/url_launcher.dart'; // Import the url_launcher package
 import 'package:voyageur/utils/colors.dart';
+import 'package:voyageur/widgets/image_carosel.dart';
 
 class PackageDetailsScreen extends StatelessWidget {
   final String packageName;
@@ -39,6 +41,10 @@ class PackageDetailsScreen extends StatelessWidget {
               if (imageUrls != null)
                 Column(
                   children: [
+                    ImageCarousel(
+                      imageUrls: imageUrls!,
+                      autoScroll: true,
+                    ),
                     // Show the package title
                     Card(
                       elevation: 2,
@@ -89,41 +95,13 @@ class PackageDetailsScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    // Display images from imageUrls in an infinite carousel
-                    InfiniteCarousel.builder(
-                      itemCount: imageUrls!.length,
-                      itemExtent: 150,
-                      controller: _controller,
-                      itemBuilder: (context, itemIndex, realIndex) {
-                        final imageUrl = imageUrls![realIndex];
-                        return Card(
-                          elevation: 0, // No elevation
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          color: Colors.grey
-                              .withOpacity(0.2), // Semi-transparent background
-                          child: Image.network(imageUrl),
-                        );
-                      },
-                    ),
-                    SizedBox(height: 16),
-                    // SmoothPageIndicator(
-                    //   controller: _controller,
-                    //   count: imageUrls!.length,
-                    //   effect: ExpandingDotsEffect(
-                    //     dotHeight: 12,
-                    //     dotWidth: 12,
-                    //     activeDotColor: Colors.blue,
-                    //   ),
-                    // ),
                   ],
                 ),
               SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
-                  // Handle the "Book Now" button action, e.g., open a web page
-                  // using a URL launcher or navigate to the booking page.
+                  // Handle the "Book Now" button action by launching the URL
+                  _launchURL(packageLink);
                 },
                 child: Text('Book Now'),
                 style: ElevatedButton.styleFrom(
@@ -140,5 +118,13 @@ class PackageDetailsScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  // Function to open the URL
+  _launchURL(String url) async {
+    Uri ur = Uri.parse(url);
+    if (!await launchUrl(ur)) {
+      throw Exception('Could not launch $ur');
+    }
   }
 }
