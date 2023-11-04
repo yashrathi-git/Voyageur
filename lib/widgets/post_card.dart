@@ -72,7 +72,7 @@ class _PostCardState extends State<PostCard> {
           return Padding(
             padding: const EdgeInsets.all(4.0),
             child: ClipRRect(
-              // borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(50.0),
               child: Image.network(
                 imageUrls[index],
                 fit: BoxFit.cover,
@@ -102,6 +102,8 @@ class _PostCardState extends State<PostCard> {
           color: width > webScreenSize ? secondaryColor : mobileBackgroundColor,
         ),
         color: mobileBackgroundColor,
+        borderRadius:
+            BorderRadius.circular(50), // This makes the corners rounded
       ),
       padding: const EdgeInsets.symmetric(
         vertical: 10,
@@ -162,7 +164,7 @@ class _PostCardState extends State<PostCard> {
                                               (e) => InkWell(
                                                   child: Container(
                                                     padding: const EdgeInsets
-                                                            .symmetric(
+                                                        .symmetric(
                                                         vertical: 12,
                                                         horizontal: 16),
                                                     child: Text(e),

@@ -1,5 +1,5 @@
+import 'dart:ffi';
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -29,54 +29,130 @@ class _AddPostScreenState extends State<AddPostScreen> {
   bool _isPackageSelected = false;
   DateTime? _selectedDate;
 
-  _selectImage(BuildContext parentContext) async {
-    return showDialog(
+  Future<void> _selectImage(BuildContext parentContext) async {
+    return showModalBottomSheet(
+      backgroundColor: Color(0x00ff0000),
       context: parentContext,
       builder: (BuildContext context) {
-        return SimpleDialog(
-          title: const Text('Create a Post'),
-          children: <Widget>[
-            SimpleDialogOption(
-                padding: const EdgeInsets.all(20),
-                child: const Text('Take a photo'),
-                onPressed: () async {
-                  Navigator.pop(context);
-                  Uint8List file = await pickImage(ImageSource.camera);
-                  setState(() {
-                    _file = file;
-                  });
-                }),
-            SimpleDialogOption(
-                padding: const EdgeInsets.all(20),
-                child: const Text('Choose from Gallery'),
-                onPressed: () async {
-                  Navigator.of(context).pop();
-                  Uint8List file = await pickImage(ImageSource.gallery);
-                  setState(() {
-                    _file = file;
-                  });
-                }),
-            SimpleDialogOption(
-              padding: const EdgeInsets.all(20),
-              child: const Text('Choose Multiple Images'),
-              onPressed: () async {
-                Navigator.of(context).pop();
-                List<Uint8List> files = await pickMultipleImages();
-                setState(() {
-                  _files = files;
-                  _file = files[0];
-                  print(_files);
-                });
-              },
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius:
+                BorderRadius.circular(20), // Adjust the radius as needed
+          ),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.bottomCenter,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Color.fromARGB(243, 0, 0, 0),
+                  Color.fromARGB(243, 0, 0, 0),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(20), // Same radius as above
             ),
-            SimpleDialogOption(
-              padding: const EdgeInsets.all(20),
-              child: const Text("Cancel"),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            )
-          ],
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SimpleDialogOption(
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.camera,
+                      color: Colors.blueAccent,
+                      size: 40,
+                    ),
+                    title: const Text(
+                      'Take a photo',
+                      style: TextStyle(
+                        color: Colors.blueAccent,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onTap: () async {
+                      Navigator.pop(context);
+                      Uint8List file = await pickImage(ImageSource.camera);
+                      setState(() {
+                        _file = file;
+                      });
+                    },
+                  ),
+                ),
+                SimpleDialogOption(
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.photo,
+                      color: Colors.greenAccent,
+                      size: 40,
+                    ),
+                    title: const Text(
+                      'Choose from Gallery',
+                      style: TextStyle(
+                        color: Colors.greenAccent,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onTap: () async {
+                      Navigator.pop(context);
+                      Uint8List file = await pickImage(ImageSource.gallery);
+                      setState(() {
+                        _file = file;
+                      });
+                    },
+                  ),
+                ),
+                SimpleDialogOption(
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.photo_library_outlined,
+                      color: Colors.pinkAccent,
+                      size: 40,
+                    ),
+                    title: const Text(
+                      'Choose Multiple Images',
+                      style: TextStyle(
+                        color: Colors.pinkAccent,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onTap: () async {
+                      Navigator.pop(context);
+                      List<Uint8List> files = await pickMultipleImages();
+                      setState(() {
+                        _files = files;
+                        _file = files[0];
+                        print(_files);
+                      });
+                    },
+                  ),
+                ),
+                SimpleDialogOption(
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.cancel,
+                      size: 40,
+                      color: Colors.redAccent,
+                    ),
+                    title: const Text(
+                      'Cancel',
+                      style: TextStyle(
+                        color: Colors.redAccent,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
         );
       },
     );
@@ -145,16 +221,34 @@ class _AddPostScreenState extends State<AddPostScreen> {
   Widget build(BuildContext context) {
     final UserProvider userProvider = Provider.of<UserProvider>(context);
 
-    return _file == null
-        ? Center(
-            child: IconButton(
-              icon: const Icon(
-                Icons.upload,
-              ),
-              onPressed: () => _selectImage(context),
-            ),
-          )
-        : buildAddPhotosForm(userProvider, context);
+    return Stack(
+      children: <Widget>[
+        // Positioned image at the top center
+        Positioned(
+          top: 0,
+          left: 0,
+          right: 0,
+          child: Image.asset(
+            'assets/final.png', // replace with your image path
+            fit: BoxFit.cover,
+          ),
+        ),
+        Padding(padding: EdgeInsets.only(top: 100.0)),
+
+        // Your existing widgets
+        _file == null
+            ? Center(
+                child: IconButton(
+                  iconSize: 60,
+                  icon: const Icon(
+                    Icons.upload,
+                  ),
+                  onPressed: () => _selectImage(context),
+                ),
+              )
+            : buildAddPhotosForm(userProvider, context),
+      ],
+    );
   }
 
   Scaffold buildAddPhotosForm(UserProvider userProvider, BuildContext context) {
