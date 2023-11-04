@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:voyageur/resources/auth_methods.dart';
 import 'package:voyageur/responsive/mobile_screen_layout.dart';
 import 'package:voyageur/responsive/responsive_layout.dart';

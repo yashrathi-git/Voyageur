@@ -1,9 +1,7 @@
-import 'dart:ffi';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:voyageur/providers/user_provider.dart';
 import 'package:voyageur/resources/firestore_methods.dart';
 import 'package:voyageur/utils/colors.dart';
@@ -31,7 +29,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   Future<void> _selectImage(BuildContext parentContext) async {
     return showModalBottomSheet(
-      backgroundColor: Color(0x00ff0000),
+      backgroundColor: const Color(0x00ff0000),
       context: parentContext,
       builder: (BuildContext context) {
         return Dialog(
@@ -43,7 +41,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
           backgroundColor: Colors.transparent,
           child: Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 begin: Alignment.bottomCenter,
                 end: Alignment.bottomLeft,
                 colors: [
@@ -82,7 +80,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 ),
                 SimpleDialogOption(
                   child: ListTile(
-                    leading: Icon(
+                    leading: const Icon(
                       Icons.photo,
                       color: Colors.greenAccent,
                       size: 40,
@@ -125,7 +123,6 @@ class _AddPostScreenState extends State<AddPostScreen> {
                       setState(() {
                         _files = files;
                         _file = files[0];
-                        print(_files);
                       });
                     },
                   ),
@@ -224,16 +221,20 @@ class _AddPostScreenState extends State<AddPostScreen> {
     return Stack(
       children: <Widget>[
         // Positioned image at the top center
-        Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
-          child: Image.asset(
-            'assets/final.png', // replace with your image path
-            fit: BoxFit.cover,
+        Padding(
+          padding: const EdgeInsets.only(top: 30),
+          // padding: const EdgeInsets.only(top: 100.0),
+          child: Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Image.asset(
+              'assets/final.png', // replace with your image path
+              fit: BoxFit.cover,
+            ),
           ),
         ),
-        Padding(padding: EdgeInsets.only(top: 100.0)),
+        Padding(padding: const EdgeInsets.only(top: 100.0)),
 
         // Your existing widgets
         _file == null

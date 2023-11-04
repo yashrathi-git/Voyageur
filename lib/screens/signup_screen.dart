@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:voyageur/resources/auth_methods.dart';
 import 'package:voyageur/responsive/mobile_screen_layout.dart';
@@ -191,7 +190,7 @@ class _SignupScreenState extends State<SignupScreen> {
               const SizedBox(
                 height: 12,
               ),
-              Spacer(), // Add Spacer widget to separate the form fields and button
+              const Spacer(), // Add Spacer widget to separate the form fields and button
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_carousel/infinite_carousel.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:url_launcher/url_launcher.dart'; // Import the url_launcher package
 import 'package:voyageur/utils/colors.dart';
 import 'package:voyageur/widgets/image_carosel.dart';
@@ -10,8 +9,6 @@ class PackageDetailsScreen extends StatelessWidget {
   final String packagePrice;
   final String packageLink;
   final List<String>? imageUrls; // List of image URLs
-
-  final InfiniteScrollController _controller = InfiniteScrollController();
 
   PackageDetailsScreen({
     Key? key,
@@ -26,7 +23,7 @@ class PackageDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: mobileBackgroundColor,
-        title: Text(this.packageName),
+        title: Text(packageName),
         centerTitle: false,
       ),
       backgroundColor:
@@ -54,7 +51,7 @@ class PackageDetailsScreen extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.2),
                       child: ListTile(
                         contentPadding: EdgeInsets.all(16),
-                        title: Text(
+                        title: const Text(
                           'Name',
                           style: TextStyle(
                             fontSize: 20,
@@ -63,7 +60,7 @@ class PackageDetailsScreen extends StatelessWidget {
                         ),
                         subtitle: Text(
                           '$packageName',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
@@ -85,7 +82,7 @@ class PackageDetailsScreen extends StatelessWidget {
                             color: Colors.grey.withOpacity(0.2),
                             child: ListTile(
                               contentPadding: EdgeInsets.all(16),
-                              title: Text(
+                              title: const Text(
                                 'Package Price',
                                 style: TextStyle(
                                   fontSize: 20,
@@ -94,7 +91,7 @@ class PackageDetailsScreen extends StatelessWidget {
                               ),
                               subtitle: Text(
                                 '₹ $packagePrice',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -114,7 +111,7 @@ class PackageDetailsScreen extends StatelessWidget {
                             child: ListTile(
                               contentPadding: EdgeInsets.all(16),
                               title: RichText(
-                                text: TextSpan(
+                                text: const TextSpan(
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -150,7 +147,7 @@ class PackageDetailsScreen extends StatelessWidget {
                   // Handle the "Book Now" button action by launching the URL
                   _launchURL(packageLink);
                 },
-                child: Text('Book Now'),
+                child: const Text('Book Now'),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue, // Button color
                   onPrimary: Colors.white, // Text color

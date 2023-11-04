@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:voyageur/utils/colors.dart';
 import 'package:voyageur/utils/global_variable.dart';
 

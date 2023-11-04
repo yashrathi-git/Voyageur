@@ -11,7 +11,7 @@ class ReelScreen extends StatefulWidget {
 
 class _ReelScreenState extends State<ReelScreen> {
   late PageController _pageController;
-  int _currentPage = 0;
+  final int _currentPage = 0;
 
   @override
   void initState() {

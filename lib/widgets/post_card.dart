@@ -164,7 +164,7 @@ class _PostCardState extends State<PostCard> {
                                               (e) => InkWell(
                                                   child: Container(
                                                     padding: const EdgeInsets
-                                                        .symmetric(
+                                                            .symmetric(
                                                         vertical: 12,
                                                         horizontal: 16),
                                                     child: Text(e),
@@ -377,7 +377,7 @@ class _PostCardState extends State<PostCard> {
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                gradient: LinearGradient(
+                                gradient: const LinearGradient(
                                   begin: Alignment.centerLeft,
                                   end: Alignment.centerRight,
                                   colors: [
