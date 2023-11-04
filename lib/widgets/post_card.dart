@@ -11,6 +11,7 @@ import 'package:voyageur/widgets/like_animation.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../screens/trip_package.dart';
 import 'image_carosel.dart';
 
 class PostCard extends StatefulWidget {
@@ -367,6 +368,7 @@ class _PostCardState extends State<PostCard> {
                               ),
                             ),
                           ),
+                        // ...
                         if (widget.snap["isPackageSelected"] == true &&
                             widget.snap["packageLink"] != null)
                           Container(
@@ -378,23 +380,36 @@ class _PostCardState extends State<PostCard> {
                                   end: Alignment.centerRight,
                                   colors: [
                                     Colors.purple,
-                                    Colors.pink
-                                  ], // You can adjust the colors
+                                    Colors.pink,
+                                  ],
                                 ),
                               ),
                               child: OutlinedButton(
                                 onPressed: () {
-                                  // Open the package link or navigate to the package screen
+                                  // Navigate to the PackageDetailsScreen
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          PackageDetailsScreen(
+                                              packageLink:
+                                                  widget.snap["packageLink"],
+                                              packageName:
+                                                  widget.snap["packageName"],
+                                              packagePrice:
+                                                  widget.snap["packagePrice"]),
+                                    ),
+                                  );
                                 },
                                 child: Text(
                                   'View Package',
                                   style: TextStyle(
-                                      color: Colors
-                                          .white), // Change text color as needed
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
+// ...
                       ],
                     ),
                   ],
