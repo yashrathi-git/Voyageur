@@ -33,25 +33,27 @@ class LocationViewScreen extends StatefulWidget {
 }
 
 class _LocationViewScreenState extends State<LocationViewScreen> {
-  List<Post> posts = [];
   List<String> imageUrls = [];
 
   @override
   void initState() {
     super.initState();
-    fetchPostsByLocation();
+    fetchImageUrls();
   }
 
-  Future<void> fetchPostsByLocation() async {
-    List<Post> result = await PostService().getPostsByLocation(widget.location);
+  Future<void> fetchImageUrls() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('posts')
+        .where('location', isEqualTo: widget.location)
+        .get();
+
+    for (QueryDocumentSnapshot document in querySnapshot.docs) {
+      final List<String> urls = List<String>.from(document['files']);
+      imageUrls.addAll(urls);
+    }
+
     setState(() {
-      posts = result;
-      // Extract imageUrls from posts and accumulate them
-      for (var post in posts) {
-        if (post.files != null) {
-          imageUrls.addAll(post.files!);
-        }
-      }
+      // State has changed, and imageUrls array is populated, build the UI.
     });
   }
 
@@ -61,37 +63,25 @@ class _LocationViewScreenState extends State<LocationViewScreen> {
       appBar: AppBar(
         title: Text(widget.location),
       ),
-      body: FutureBuilder(
-        future: FirebaseFirestore.instance
-            .collection('posts')
-            .where('location', isEqualTo: widget.location)
-            .get(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+      body: GridView.builder(
+        shrinkWrap: true,
+        itemCount: imageUrls.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 3,
+          mainAxisSpacing: 1.0,
+          childAspectRatio: 1,
+        ),
+        itemBuilder: (context, index) {
+          String imageUrl = imageUrls[index];
 
-          return GridView.builder(
-            shrinkWrap: true,
-            itemCount: (snapshot.data! as dynamic).docs.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 1.5,
-              childAspectRatio: 1,
+          return SizedBox(
+            width: 200, // Adjust the width as needed
+            height: 200, // Adjust the height as needed
+            child: Image(
+              image: NetworkImage(imageUrl),
+              fit: BoxFit.cover,
             ),
-            itemBuilder: (context, index) {
-              DocumentSnapshot snap = (snapshot.data! as dynamic).docs[index];
-
-              return SizedBox(
-                child: Image(
-                  image: NetworkImage(snap['postUrl']),
-                  fit: BoxFit.cover,
-                ),
-              );
-            },
           );
         },
       ),
