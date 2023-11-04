@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  carousel_slider: ^4.2.1
   cloud_firestore: ^4.8.1
   cupertino_icons: ^1.0.2
   firebase_auth: ^4.6.3
@@ -38,6 +39,7 @@ dependencies:
   flutter_svg: ^2.0.7
   google_maps_flutter: ^2.5.0
   image_picker: ^0.8.4+4
+  infinite_carousel: ^1.0.3
   intl: ^0.18.1
   multi_image_picker: ^4.8.01
   provider: ^6.0.1
@@ -63,7 +65,6 @@ flutter:
     - assets/logo.png
     - assets/logo2.png
     - assets/logo3.png
-
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
