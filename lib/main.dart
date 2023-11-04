@@ -8,6 +8,7 @@ import 'package:voyageur/responsive/mobile_screen_layout.dart';
 import 'package:voyageur/responsive/responsive_layout.dart';
 import 'package:voyageur/responsive/web_screen_layout.dart';
 import 'package:voyageur/screens/login_screen.dart';
+import 'package:voyageur/screens/reel_screen.dart';
 import 'package:voyageur/utils/colors.dart';
 import 'package:provider/provider.dart';
 
