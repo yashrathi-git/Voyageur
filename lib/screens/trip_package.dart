@@ -71,29 +71,76 @@ class PackageDetailsScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 16),
-                    Card(
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      color: Colors.grey.withOpacity(0.2),
-                      child: ListTile(
-                        contentPadding: EdgeInsets.all(16),
-                        title: Text(
-                          'Package Price',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                    // Package price card
+                    Row(
+                      children: [
+                        Expanded(
+                          flex:
+                              7, // Adjust the flex values to control the card widths
+                          child: Card(
+                            elevation: 2,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            color: Colors.grey.withOpacity(0.2),
+                            child: ListTile(
+                              contentPadding: EdgeInsets.all(16),
+                              title: Text(
+                                'Package Price',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              subtitle: Text(
+                                '₹ $packagePrice',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                        subtitle: Text(
-                          '₹ $packagePrice',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                        Expanded(
+                          flex:
+                              3, // Adjust the flex values to control the card widths
+                          child: Card(
+                            elevation: 2,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            color: Colors.green, // Green background
+                            child: ListTile(
+                              contentPadding: EdgeInsets.all(16),
+                              title: RichText(
+                                text: TextSpan(
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: '10%',
+                                      style: TextStyle(
+                                        fontSize:
+                                            30, // Increase the font size for "10%"
+                                        color: Colors.white, // White text color
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: ' voya-coins',
+                                      style: TextStyle(
+                                        color: Colors.white, // White text color
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                   ],
                 ),
