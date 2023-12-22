@@ -20,6 +20,11 @@ Explore, Connect, Share, and Earn with Voyageur: Your All-in-One Travel Companio
   </tr>
 </table>
 
+## Video Demo
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/Az6K7JTJpOE/0.jpg)](https://www.youtube.com/watch?v=Az6K7JTJpOE)
+
+[Demo on YouTube](https://www.youtube.com/watch?v=Az6K7JTJpOE)
+
 
 ## The Problem Voyageur Solves
 
